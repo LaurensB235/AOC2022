@@ -1,28 +1,28 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 
-namespace AOC2022;
+namespace AOC2022.Days;
 
 public class DayThree
 {
-    private string Values = "abcdefghijklmnopqrstuvwxyz";
-    private List<(string, string, string)> Bags = new();
+    private string _values = "abcdefghijklmnopqrstuvwxyz";
+    private readonly List<(string, string, string)> _bags = new();
 
     [OneTimeSetUp]
     public void Setup()
     {
-        Values += Values.ToUpper();
+        _values += _values.ToUpper();
         foreach (var roll in File.ReadAllLines("Input/DayThree.txt"))
         {
             var mid = roll.Length / 2;
-            Bags.Add((roll[..mid], roll[mid..], roll));
+            _bags.Add((roll[..mid], roll[mid..], roll));
         }
     }
 
     [Test]
     public void Test1()
     {
-        Bags.ConvertAll(bag => GetScore(bag.Item1.ToList().Find(item => bag.Item2.Contains(item))))
+        _bags.ConvertAll(bag => GetScore(bag.Item1.ToList().Find(item => bag.Item2.Contains(item))))
             .Sum()
             .Should()
             .Be(7763);
@@ -31,7 +31,7 @@ public class DayThree
     [Test]
     public void Test2()
     {
-        var groups = Bags.Select((x, idx) => new { x, idx })
+        var groups = _bags.Select((x, idx) => new { x, idx })
             .GroupBy(x => x.idx / 3)
             .Select(g => g.Select(a => a.x))
             .Select(item => item.ToList())
@@ -43,6 +43,6 @@ public class DayThree
 
     private int GetScore(char value)
     {
-        return Values.IndexOf(value) + 1;
+        return _values.IndexOf(value) + 1;
     }
 }

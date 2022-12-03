@@ -1,11 +1,11 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace AOC2022;
+namespace AOC2022.Days;
 
 public class DayOne
 {
-    private List<int> Elves { get; set; }
+    private List<int> Elves { get; set; } = null!;
 
     [OneTimeSetUp]
     public void Setup()

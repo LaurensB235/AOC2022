@@ -1,7 +1,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace AOC2022;
+namespace AOC2022.Days;
 
 public class DayTwo
 {
